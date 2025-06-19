@@ -1,7 +1,7 @@
 from typing import List, Dict, Any, Optional
 from crewai import Task
 from langchain_ollama import ChatOllama
-from .research_crew import agents
+from research_crew import agents
 
 from config import llm
 
