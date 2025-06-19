@@ -2,12 +2,11 @@ import numpy as np
 from datetime import datetime
 from crewai import Task, Agent, Crew, Process
 from langchain_ollama import ChatOllama
-from interaction_tools import predict_toxin_protein_interaction, classify_interaction_type_detailed, predict_structural_changes_binding, calculate_toxicity_enhancement_factor
+from .interaction_tools import predict_toxin_protein_interaction, classify_interaction_type_detailed, predict_structural_changes_binding, calculate_toxicity_enhancement_factor
 from config import llm
 
 def agents():
 
-    # Molecular Docking Agent (replaces RDKit functionality from ADK)
     molecular_docker = Agent(
         role="Molecular Docking Specialist",
         goal="Perform molecular docking simulations using RDKit and predict binding poses",

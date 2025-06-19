@@ -3,7 +3,7 @@ import numpy as np
 from datetime import datetime
 from crewai import Task,Agent,Crew,Process
 from langchain_ollama import ChatOllama
-from safety_tools import safety_score,assess_critical_control_points,assess_regulatory_compliance,safety_recommendations
+from .safety_tools import safety_score,assess_critical_control_points,assess_regulatory_compliance,safety_recommendations
 from config import llm
 def agents():
     

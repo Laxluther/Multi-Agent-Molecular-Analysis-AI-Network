@@ -1,8 +1,6 @@
-import os
+
 from datetime import datetime
 from typing import Dict, List, Any, Optional
-
-# Import all CrewAI crews
 from crew_agent.research_agents.research_crew import researcher_crew
 from crew_agent.research_agents.research_task import research_tasks
 from crew_agent.protein_agents.protein_crew import protein_crew
@@ -16,22 +14,17 @@ from crew_agent.safety_agents.safety_task import safety_tasks
 from crew_agent.reporting_agents.reporting_crew import report_crew
 from crew_agent.reporting_agents.reporting_task import reporting_tasks
 
-# Import data models and tools
 from data_models import FoodSample, ProcessingConditions
 from molecular_tools import MolecularToolkit
 
-class SimpleFoodSafetyOrchestrator:
-    """
-    Simple orchestrator using only CrewAI crews - no A2A protocol
-    """
-    
+class FoodSafetyOrchestrator:
+ 
     def __init__(self):
         self.molecular_toolkit = MolecularToolkit()
-        print("🧬 FoodSafety AI Network - Simple CrewAI Orchestrator Initialized")
+        print("FoodSafety AI Network")
     
     def analyze_food_safety(self, food_sample: FoodSample) -> Dict[str, Any]:
         """
-        Main method to analyze food safety using pure CrewAI coordination
         
         Args:
             food_sample: Food sample data
@@ -40,41 +33,29 @@ class SimpleFoodSafetyOrchestrator:
             Complete analysis results
         """
         
-        print(f"\n🔬 Starting analysis for: {food_sample.name}")
-        print(f"📊 Proteins: {', '.join(food_sample.proteins)}")
-        print(f"☠️ Suspected toxins: {', '.join(food_sample.suspected_toxins)}")
-        print(f"🌡️ Processing: {food_sample.processing_conditions.temperature}°C, pH {food_sample.processing_conditions.ph}")
+        print(f"\n Starting analysis for: {food_sample.name}")
+        print(f" Proteins: {', '.join(food_sample.proteins)}")
+        print(f" Suspected toxins: {', '.join(food_sample.suspected_toxins)}")
+        print(f" Processing: {food_sample.processing_conditions.temperature}°C, pH {food_sample.processing_conditions.ph}")
         
-        # Step 1: Research Crew - Gather literature and regulatory data
-        print("\n📚 Step 1: Research Coordination...")
+        print("\n Step 1: Research Coordination...")
         research_results = self.run_research_analysis(food_sample)
-        
-        # Step 2: Protein Crew - Analyze with ESMFold
-        print("\n🧬 Step 2: Protein Structure Analysis...")
+        print("\n Step 2: Protein Structure Analysis...")
         protein_results = self.run_protein_analysis(food_sample, research_results)
-        
-        # Step 3: Interaction Crew - Use RDKit for molecular docking
-        print("\n⚗️ Step 3: Interaction Prediction...")
+        print("\n Step 3: Interaction Prediction...")
         interaction_results = self.run_interaction_analysis(food_sample, protein_results, research_results)
-        
-        # Step 4: Enzyme Crew - Simulate kinetics
-        print("\n🔬 Step 4: Enzyme Simulation...")
+        print("\n Step 4: Enzyme Simulation...")
         enzyme_results = self.run_enzyme_analysis(food_sample, protein_results, interaction_results, research_results)
-        
-        # Step 5: Safety Crew - Risk assessment
-        print("\n🛡️ Step 5: Safety Assessment...")
+        print("\n Step 5: Safety Assessment...")
         safety_results = self.run_safety_analysis(food_sample, protein_results, interaction_results, enzyme_results)
-        
-        # Step 6: Reporting Crew - Generate final report
-        print("\n📋 Step 6: Report Generation...")
+        print("\n Step 6: Report Generation...")
         final_report = self.run_reporting_analysis(food_sample, research_results, protein_results, 
                                                  interaction_results, enzyme_results, safety_results)
         
-        print("\n✅ Analysis Complete!")
+        print("\n Analysis Complete!")
         return final_report
     
     def run_research_analysis(self, food_sample: FoodSample) -> Dict[str, Any]:
-        """Run research crew analysis"""
         
         # Prepare research context
         research_context = {
@@ -384,51 +365,40 @@ def create_sample_food():
 
 def main():
     """Main function to run the simplified orchestrator"""
-    print("🧬 FoodSafety AI Intelligence Network")
-    print("=" * 50)
-    print("🎯 Using Pure CrewAI Orchestration (No A2A Protocol)")
-    print("🔬 Features: ESMFold + RDKit + Enzyme Kinetics")
-    print("🤖 All agents: Research + Protein + Interaction + Enzyme + Safety + Reporting")
+    print("FoodSafety AI Intelligence Network")
+
+    orchestrator = FoodSafetyOrchestrator()
     
-    # Check environment
-    if not os.getenv('GOOGLE_API_KEY'):
-        print("\n❌ Error: GOOGLE_API_KEY not found")
-        print("Note: This simplified version uses CrewAI with Ollama")
-        print("ESMFold and RDKit features are preserved in the tools")
-    
-    # Create orchestrator
-    orchestrator = SimpleFoodSafetyOrchestrator()
-    
-    # Create sample food
+  
     food_sample = create_sample_food()
     
-    print(f"\n🔬 Analyzing Sample: {food_sample.name}")
-    print(f"📊 Proteins: {len(food_sample.proteins)}")
-    print(f"☠️ Toxins: {len(food_sample.suspected_toxins)}")
-    print(f"🌡️ Conditions: {food_sample.processing_conditions.temperature}°C, pH {food_sample.processing_conditions.ph}")
+    print(f"\n Analyzing Sample: {food_sample.name}")
+    print(f"Proteins: {len(food_sample.proteins)}")
+    print(f"Toxins: {len(food_sample.suspected_toxins)}")
+    print(f"Conditions: {food_sample.processing_conditions.temperature}°C, pH {food_sample.processing_conditions.ph}")
     
     # Run analysis
     results = orchestrator.analyze_food_safety(food_sample)
     
     # Display results
     print("\n" + "="*50)
-    print("📋 ANALYSIS RESULTS")
+    print("ANALYSIS RESULTS")
     print("="*50)
-    print(f"🎯 Safety Score: {results['executive_summary']['safety_score']}/10")
-    print(f"⚠️ Risk Level: {results['executive_summary']['risk_level'].upper()}")
-    print(f"🧬 Proteins Analyzed: {len(food_sample.proteins)}")
-    print(f"⚗️ Interactions Predicted: {len(results['detailed_results']['interaction_predictions']['interactions'])}")
+    print(f"Safety Score: {results['executive_summary']['safety_score']}/10")
+    print(f"Risk Level: {results['executive_summary']['risk_level'].upper()}")
+    print(f"Proteins Analyzed: {len(food_sample.proteins)}")
+    print(f"Interactions Predicted: {len(results['detailed_results']['interaction_predictions']['interactions'])}")
     
-    print("\n🔍 Key Findings:")
+    print("\n Key Findings:")
     for finding in results['executive_summary']['key_findings']:
         print(f"  • {finding}")
     
-    print("\n💡 Recommendations:")
+    print("\n Recommendations:")
     for rec in results['recommendations']:
         print(f"  • {rec}")
     
-    print(f"\n✅ Complete analysis report available in results data structure")
-    print(f"🕒 Analysis completed at: {results['sample_info']['analysis_date']}")
+    print("Complete analysis report available in results data structure")
+    print(f"Analysis completed at: {results['sample_info']['analysis_date']}")
 
 if __name__ == "__main__":
     main()

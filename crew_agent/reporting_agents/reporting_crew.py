@@ -1,10 +1,10 @@
-
 import numpy as np
 from datetime import datetime
 from crewai import Task,Agent,Crew,Process
 from langchain_ollama import ChatOllama
-from reporting_tools import executive_summary,format_technical_results,generate_recommendations_section,generate_charts_data,compile_complete_report
+from .reporting_tools import executive_summary,format_technical_results,generate_recommendations_section,generate_charts_data,compile_complete_report
 from config import llm
+
 def agents():
     """
     Create report generation crew

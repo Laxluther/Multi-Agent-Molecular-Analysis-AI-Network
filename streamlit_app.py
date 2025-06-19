@@ -11,14 +11,13 @@ import sys
 project_root = Path(__file__).parent
 sys.path.append(str(project_root))
 
-# Import simplified orchestrator and data models
-from orchestrator import SimpleFoodSafetyOrchestrator, create_sample_food
+from orchestrator import FoodSafetyOrchestrator, create_sample_food
 from data_models import FoodSample, ProcessingConditions
 from molecular_tools import MolecularToolkit
 
 # Page configuration
 st.set_page_config(
-    page_title="FoodSafety AI Network - Simple",
+    page_title="FoodSafety AI Network",
     page_icon="🧬",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -57,7 +56,7 @@ st.markdown("""
 
 # Initialize session state
 if 'orchestrator' not in st.session_state:
-    st.session_state.orchestrator = SimpleFoodSafetyOrchestrator()
+    st.session_state.orchestrator = FoodSafetyOrchestrator()
 if 'analysis_results' not in st.session_state:
     st.session_state.analysis_results = None
 if 'molecular_toolkit' not in st.session_state:
@@ -112,7 +111,7 @@ def render_header():
     # System status
     col1, col2, col3, col4 = st.columns(4)
     with col1:
-        st.metric("🎯 Framework", "CrewAI Only", "Simplified")
+        st.metric("🎯 Framework", "CrewAI", "")
     with col2:
         st.metric("🧪 ESMFold", "Active", "Protein Analysis")
     with col3:

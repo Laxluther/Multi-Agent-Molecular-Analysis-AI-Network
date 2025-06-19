@@ -7,7 +7,6 @@ import math
 
 from transformers import AutoTokenizer, EsmForProteinFolding
 import torch
-# TRANSFORMERS_AVAILABLE = True
 
 
 @tool

@@ -2,7 +2,7 @@ import numpy as np
 from datetime import datetime
 from crewai import Task, Agent, Crew, Process
 from langchain_ollama import ChatOllama
-from enzyme_tools import simulate_enzyme_kinetics, predict_enzyme_inhibition, calculate_enzyme_stability
+from .enzyme_tools import simulate_enzyme_kinetics, predict_enzyme_inhibition, calculate_enzyme_stability
 from config import llm
 
 def agents():

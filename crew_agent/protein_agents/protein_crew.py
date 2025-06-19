@@ -1,8 +1,7 @@
 import numpy as np
 from datetime import datetime
 from crewai import Task, Agent, Crew, Process
-from langchain_ollama import ChatOllama
-from protein_tools import analyze_protein_structure, assess_protein_stability_conditions, calculate_processing_sensitivity, predict_functional_sites_pattern
+from .protein_tools import analyze_protein_structure, assess_protein_stability_conditions, calculate_processing_sensitivity, predict_functional_sites_pattern
 from config import llm
 
 def agents():
@@ -12,8 +11,6 @@ def agents():
     Returns:
         Tuple of protein analysis agents
     """
-
-    # Structure Analysis Agent (replaces ESMFold functionality from ADK)
     structure_analyzer = Agent(
         role="Protein Structure Analyst",
         goal="Analyze protein structures using ESMFold and predict 3D conformations",

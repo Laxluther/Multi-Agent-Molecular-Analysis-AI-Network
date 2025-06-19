@@ -1,6 +1,6 @@
 from typing import List, Dict, Any, Optional
 from crewai import Task
-from interaction_crew import agents
+from .interaction_crew import agents
 
 A, B, C, D, E, F = agents()
 

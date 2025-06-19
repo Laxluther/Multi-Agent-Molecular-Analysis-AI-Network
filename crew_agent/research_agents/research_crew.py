@@ -2,7 +2,7 @@ import numpy as np
 from datetime import datetime
 from crewai import Task,Agent,Crew,Process
 from langchain_ollama import ChatOllama
-from research_tools import search_pubmed, search_food_database, search_toxin_database, search_protein_interactions
+from .research_tools import search_pubmed, search_food_database, search_toxin_database, search_protein_interactions
 from config import llm
 
 def agents():

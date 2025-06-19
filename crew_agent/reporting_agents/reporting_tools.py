@@ -324,7 +324,7 @@ def compile_complete_report(executive_summary: str, technical_results: Dict[str,
 **Report ID**: {metadata.get('report_id', 'FSA-' + datetime.now().strftime('%Y%m%d-%H%M%S'))}
 **Generated**: {datetime.now().strftime('%B %d, %Y at %H:%M UTC')}
 **Analysis Platform**: FoodSafety AI Intelligence Network
-**Framework**: Google ADK + CrewAI + A2A Protocol
+**Framework**: CrewAI
 
 ---
 
@@ -349,11 +349,9 @@ def compile_complete_report(executive_summary: str, technical_results: Dict[str,
 ## METHODOLOGY & CONFIDENCE
 
 ### Analysis Framework
-This assessment utilized a multi-agent artificial intelligence system combining:
+This assessment utilized a multi-agent artificial intelligence system:
 
-- **Google Agent Development Kit (ADK)**: For computational molecular analysis
 - **CrewAI Framework**: For collaborative workflow coordination  
-- **A2A Protocol**: For inter-agent communication and data exchange
 
 ### Computational Methods
 - **Protein Structure Prediction**: ESMFold neural network models

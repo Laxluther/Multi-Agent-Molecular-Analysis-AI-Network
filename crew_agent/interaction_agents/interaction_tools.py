@@ -3,14 +3,8 @@ from typing import Dict, List, Any, Optional, Tuple
 import numpy as np
 import math
 
-# Keep all RDKit functionality from original ADK agent
-try:
-    from rdkit import Chem
-    from rdkit.Chem import Descriptors, rdMolDescriptors
-    RDKIT_AVAILABLE = True
-except ImportError:
-    RDKIT_AVAILABLE = False
-
+from rdkit import Chem
+from rdkit.Chem import Descriptors, rdMolDescriptors
 @tool
 def predict_toxin_protein_interaction(toxin_name: str, protein_name: str,
                                     toxin_properties: Dict[str, Any],
@@ -95,63 +89,39 @@ def dock_molecule_rdkit(toxin_smiles: str, protein_name: str, protein_structure:
         ]
     }
     
-    if RDKIT_AVAILABLE:
-        # Parse toxin molecule with RDKit
-        mol = Chem.MolFromSmiles(toxin_smiles)
-        if mol is None:
-            return mock_docking_results(toxin_smiles, protein_name)
-        
-        # Get protein binding sites
-        binding_sites = binding_site_database.get(protein_name.lower(), [])
-        
-        # Calculate molecular properties with RDKit
-        mol_weight = Descriptors.MolWt(mol)
-        logp = Descriptors.MolLogP(mol)
-        hbd = Descriptors.NumHDonors(mol)
-        hba = Descriptors.NumHAcceptors(mol)
-        
-        poses = []
-        for i, site in enumerate(binding_sites):
-            # Calculate binding affinity based on properties
-            affinity = calculate_binding_affinity_rdkit(
-                mol_weight, logp, hbd, hba, site
-            )
-            
-            poses.append({
-                'pose_id': i + 1,
-                'binding_site': site['residues'],
-                'binding_affinity': affinity,
-                'interaction_type': site['type'],
-                'confidence_score': np.random.uniform(0.7, 0.95),
-                'contact_residues': identify_contact_residues(site),
-                'interaction_energy': affinity * 1.2
-            })
-        
-        # Sort by binding affinity (more negative = stronger binding)
-        poses.sort(key=lambda x: x['binding_affinity'])
-        return poses[:5]  # Return top 5 poses
-    else:
-        return mock_docking_results(toxin_smiles, protein_name)
-
-def mock_docking_results(toxin_smiles: str, protein_name: str) -> List[Dict[str, Any]]:
-    """Mock docking results when RDKit is not available"""
-    num_poses = np.random.randint(3, 6)
-    poses = []
     
-    for i in range(num_poses):
-        affinity = np.random.uniform(-8.5, -2.0)  # kcal/mol
+    # Parse toxin molecule with RDKit
+    mol = Chem.MolFromSmiles(toxin_smiles)
+    
+    # Get protein binding sites
+    binding_sites = binding_site_database.get(protein_name.lower(), [])
+    
+    # Calculate molecular properties with RDKit
+    mol_weight = Descriptors.MolWt(mol)
+    logp = Descriptors.MolLogP(mol)
+    hbd = Descriptors.NumHDonors(mol)
+    hba = Descriptors.NumHAcceptors(mol)
+    
+    poses = []
+    for i, site in enumerate(binding_sites):
+        # Calculate binding affinity based on properties
+        affinity = calculate_binding_affinity_rdkit(
+            mol_weight, logp, hbd, hba, site
+        )
+        
         poses.append({
             'pose_id': i + 1,
-            'binding_site': [np.random.randint(20, 200) for _ in range(3)],
-            'binding_affinity': round(affinity, 2),
-            'interaction_type': np.random.choice(['hydrophobic', 'electrostatic', 'hydrogen_bond']),
-            'confidence_score': np.random.uniform(0.6, 0.9),
-            'contact_residues': [f"ALA{np.random.randint(20, 200)}" for _ in range(3)],
-            'interaction_energy': round(affinity * 1.2, 2)
+            'binding_site': site['residues'],
+            'binding_affinity': affinity,
+            'interaction_type': site['type'],
+            'confidence_score': np.random.uniform(0.7, 0.95),
+            'contact_residues': identify_contact_residues(site),
+            'interaction_energy': affinity * 1.2
         })
     
+    # Sort by binding affinity (more negative = stronger binding)
     poses.sort(key=lambda x: x['binding_affinity'])
-    return poses
+    return poses[:5]  
 
 def calculate_binding_affinity_rdkit(mol_weight: float, logp: float, 
                                   hbd: int, hba: int, site: Dict[str, Any]) -> float:

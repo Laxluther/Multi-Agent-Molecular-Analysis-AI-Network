@@ -3,7 +3,7 @@ Molecular Analysis Tools
 Comprehensive toolkit for food safety molecular analysis
 """
 
-import logging
+
 import json
 import csv
 from typing import Dict, List, Any, Optional, Tuple
@@ -11,17 +11,12 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-# Try to import molecular libraries
-try:
-    from rdkit import Chem
-    from rdkit.Chem import Descriptors, rdMolDescriptors, AllChem
-    RDKIT_AVAILABLE = True
-except ImportError:
-    RDKIT_AVAILABLE = False
 
-from core.data_models import ToxinProfile, ProteinType, ToxinType, COMMON_FOOD_TOXINS, COMMON_FOOD_PROTEINS
+from rdkit import Chem
+from rdkit.Chem import Descriptors, rdMolDescriptors, AllChem
 
-logger = logging.getLogger(__name__)
+
+from data_models import ToxinProfile, ProteinType, ToxinType, COMMON_FOOD_TOXINS, COMMON_FOOD_PROTEINS
 
 
 class MolecularToolkit:
@@ -35,7 +30,6 @@ class MolecularToolkit:
         self.regulatory_database = self._load_regulatory_database()
         self.interaction_database = self._load_interaction_database()
         
-        logger.info("Molecular toolkit initialized")
     
     def _load_protein_database(self) -> Dict[str, Dict[str, Any]]:
         """Load comprehensive protein database"""
@@ -231,43 +225,38 @@ class MolecularToolkit:
         Returns:
             Dictionary of molecular properties
         """
-        if not RDKIT_AVAILABLE:
+
+        mol = Chem.MolFromSmiles(smiles)
+        if mol is None:
             return self._mock_molecular_properties()
         
-        try:
-            mol = Chem.MolFromSmiles(smiles)
-            if mol is None:
-                return self._mock_molecular_properties()
+        properties = {
+            'molecular_weight': Descriptors.MolWt(mol),
+            'logp': Descriptors.MolLogP(mol),
+            'hbd': Descriptors.NumHDonors(mol),
+            'hba': Descriptors.NumHAcceptors(mol),
+            'rotatable_bonds': Descriptors.NumRotatableBonds(mol),
+            'aromatic_rings': Descriptors.NumAromaticRings(mol),
+            'tpsa': Descriptors.TPSA(mol),
+            'heavy_atoms': Descriptors.HeavyAtomCount(mol),
+            'formal_charge': Chem.rdmolops.GetFormalCharge(mol),
+            'lipinski_hbd': Descriptors.NumHDonors(mol) <= 5,
+            'lipinski_hba': Descriptors.NumHAcceptors(mol) <= 10,
+            'lipinski_mw': Descriptors.MolWt(mol) <= 500,
+            'lipinski_logp': Descriptors.MolLogP(mol) <= 5
+        }
+        
+        # Calculate Lipinski's Rule of Five compliance
+        properties['lipinski_violations'] = sum([
+            not properties['lipinski_hbd'],
+            not properties['lipinski_hba'],
+            not properties['lipinski_mw'],
+            not properties['lipinski_logp']
+        ])
+        
+        return properties
             
-            properties = {
-                'molecular_weight': Descriptors.MolWt(mol),
-                'logp': Descriptors.MolLogP(mol),
-                'hbd': Descriptors.NumHDonors(mol),
-                'hba': Descriptors.NumHAcceptors(mol),
-                'rotatable_bonds': Descriptors.NumRotatableBonds(mol),
-                'aromatic_rings': Descriptors.NumAromaticRings(mol),
-                'tpsa': Descriptors.TPSA(mol),
-                'heavy_atoms': Descriptors.HeavyAtomCount(mol),
-                'formal_charge': Chem.rdmolops.GetFormalCharge(mol),
-                'lipinski_hbd': Descriptors.NumHDonors(mol) <= 5,
-                'lipinski_hba': Descriptors.NumHAcceptors(mol) <= 10,
-                'lipinski_mw': Descriptors.MolWt(mol) <= 500,
-                'lipinski_logp': Descriptors.MolLogP(mol) <= 5
-            }
-            
-            # Calculate Lipinski's Rule of Five compliance
-            properties['lipinski_violations'] = sum([
-                not properties['lipinski_hbd'],
-                not properties['lipinski_hba'],
-                not properties['lipinski_mw'],
-                not properties['lipinski_logp']
-            ])
-            
-            return properties
-            
-        except Exception as e:
-            logger.error(f"Molecular property calculation failed: {e}")
-            return self._mock_molecular_properties()
+        
     
     def _mock_molecular_properties(self) -> Dict[str, float]:
         """Generate mock molecular properties when RDKit is unavailable"""
@@ -335,8 +324,7 @@ class MolecularToolkit:
         # Predict based on properties
         toxin_potency = self._assess_toxin_potency(toxin_profile)
         protein_vulnerability = self._assess_protein_vulnerability(protein_info)
-        
-        # Simple risk calculation
+   
         risk_score = (toxin_potency + protein_vulnerability) / 2
         
         if risk_score > 0.7:
@@ -529,7 +517,7 @@ class MolecularToolkit:
             df = pd.DataFrame(all_limits)
             df.to_csv(filepath, index=False)
         
-        logger.info(f"Exported {data_type} data to {filepath}")
+        
     
     def get_summary_statistics(self) -> Dict[str, Any]:
         """Get summary statistics of the molecular toolkit"""
@@ -566,11 +554,10 @@ def test_molecular_toolkit():
     toxin_profile = toolkit.get_toxin_profile('aflatoxin_b1')
     print(f"☠️ Aflatoxin B1 LD50: {toxin_profile.ld50 if toxin_profile else 'Not found'} mg/kg")
     
-    # Test molecular properties
-    if RDKIT_AVAILABLE:
-        smiles = 'COc1cc2c(c3oc4cc(OC)c(O)cc4c(=O)c3c1)C1C=COC1O2'  # Aflatoxin B1
-        props = toolkit.calculate_molecular_properties(smiles)
-        print(f"⚗️ Molecular properties: MW={props.get('molecular_weight', 0):.1f}, LogP={props.get('logp', 0):.2f}")
+    
+    smiles = 'COc1cc2c(c3oc4cc(OC)c(O)cc4c(=O)c3c1)C1C=COC1O2'  # Aflatoxin B1
+    props = toolkit.calculate_molecular_properties(smiles)
+    print(f"⚗️ Molecular properties: MW={props.get('molecular_weight', 0):.1f}, LogP={props.get('logp', 0):.2f}")
     
     # Test interaction risk prediction
     risk = toolkit.predict_protein_toxin_interaction_risk('albumin', 'aflatoxin_b1')
