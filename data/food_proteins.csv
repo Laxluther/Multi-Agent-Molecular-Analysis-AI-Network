@@ -1,0 +1,89 @@
+protein_name,common_name,protein_type,molecular_weight_da,isoelectric_point,sequence_length,food_source,function,stability_score,hydrophobicity_index,allergenicity
+casein,Alpha-s1-Casein,dairy,23614,4.6,199,cow_milk,structural_protein,7.5,-0.15,medium
+whey_protein,Beta-Lactoglobulin,dairy,18400,5.2,162,cow_milk,transport_protein,6.8,-0.08,high
+lactalbumin,Alpha-Lactalbumin,dairy,14200,4.8,123,cow_milk,enzyme_cofactor,7.2,0.02,medium
+lactoglobulin,Beta-Lactoglobulin,dairy,18400,5.2,162,cow_milk,lipid_binding,6.8,-0.08,high
+immunoglobulin,IgG Heavy Chain,dairy,50000,6.8,450,cow_milk,immune_function,8.2,0.12,low
+lactoferrin,Lactoferrin,dairy,80000,8.5,703,cow_milk,antimicrobial,8.8,0.05,low
+lysozyme,Lysozyme,dairy,14300,11.35,129,cow_milk,antimicrobial,9.2,0.18,low
+albumin,Serum Albumin,dairy,66430,4.7,585,cow_milk,transport_protein,7.8,-0.22,medium
+myosin,Myosin Heavy Chain,meat,223000,5.4,1939,chicken_muscle,motor_protein,6.5,0.08,low
+actin,Actin,meat,42000,5.3,375,chicken_muscle,structural_protein,7.0,0.03,low
+tropomyosin,Tropomyosin,meat,33000,4.7,284,chicken_muscle,regulatory_protein,6.8,0.15,medium
+troponin,Troponin C,meat,18000,4.1,159,chicken_muscle,regulatory_protein,6.2,-0.05,low
+hemoglobin,Hemoglobin Alpha,meat,15126,8.7,141,beef_blood,oxygen_transport,7.5,0.02,low
+myoglobin,Myoglobin,meat,17699,7.2,153,beef_muscle,oxygen_storage,7.8,0.12,low
+collagen,Collagen Type I,meat,95000,5.8,1464,beef_connective,structural_protein,8.5,0.22,low
+elastin,Elastin,meat,68000,10.2,786,meat_connective,structural_protein,8.8,0.35,low
+gliadin,Alpha-Gliadin,grain,36000,8.0,266,wheat,storage_protein,5.5,0.28,high
+glutenin,High MW Glutenin,grain,83000,7.5,681,wheat,storage_protein,6.2,0.15,high
+albumin_wheat,Wheat Albumin,grain,16000,5.2,144,wheat,metabolic_enzyme,6.5,-0.12,medium
+globulin_wheat,Wheat Globulin,grain,42000,6.8,380,wheat,storage_protein,6.8,0.05,medium
+hordein,B-Hordein,grain,35000,7.8,320,barley,storage_protein,5.8,0.25,medium
+secalin,Secalin,grain,38000,8.2,340,rye,storage_protein,5.9,0.22,medium
+zein,Alpha-Zein,grain,22000,9.5,210,corn,storage_protein,6.5,0.45,low
+avenin,Avenin,grain,32000,8.5,290,oats,storage_protein,6.0,0.18,medium
+ovalbumin,Ovalbumin,egg,44287,4.5,385,chicken_egg,storage_protein,7.2,-0.05,high
+ovotransferrin,Ovotransferrin,egg,77700,6.1,686,chicken_egg,antimicrobial,8.0,0.08,medium
+ovomucoid,Ovomucoid,egg,28000,4.1,186,chicken_egg,protease_inhibitor,8.5,-0.15,high
+lysozyme_egg,Lysozyme,egg,14300,11.35,129,chicken_egg,antimicrobial,9.2,0.18,medium
+ovomucin,Ovomucin,egg,210000,4.5,1650,chicken_egg,gel_formation,7.8,0.02,low
+avidin,Avidin,egg,68000,10.0,128,chicken_egg,biotin_binding,8.8,0.12,low
+glycinin,11S Glycinin,legume,360000,6.4,2871,soybean,storage_protein,7.5,0.02,medium
+conglycinin,7S Conglycinin,legume,180000,5.2,1456,soybean,storage_protein,6.8,-0.08,medium
+lectin,Soybean Agglutinin,legume,120000,6.0,1068,soybean,carbohydrate_binding,8.2,0.15,low
+trypsin_inhibitor,Kunitz Inhibitor,legume,21500,4.5,181,soybean,protease_inhibitor,8.5,-0.12,medium
+lipoxygenase,Lipoxygenase-1,legume,94000,9.0,839,soybean,lipid_oxidation,6.5,0.22,low
+urease,Urease,legume,545000,7.0,4968,soybean,nitrogen_metabolism,7.0,0.05,low
+phaseolin,Phaseolin,legume,50000,5.8,426,common_bean,storage_protein,7.2,0.08,medium
+vicilin,Vicilin,legume,150000,6.2,1284,pea,storage_protein,7.0,0.02,medium
+legumin,Legumin,legume,320000,6.8,2560,pea,storage_protein,7.5,0.05,medium
+convicilin,Convicilin,legume,71000,7.5,596,pea,storage_protein,6.8,0.12,low
+actinidin,Actinidin,fruit,23400,8.9,212,kiwi,cysteine_protease,6.2,0.18,medium
+bromelain,Bromelain,fruit,33000,9.5,314,pineapple,cysteine_protease,6.5,0.15,medium
+papain,Papain,fruit,23406,8.8,212,papaya,cysteine_protease,6.8,0.22,medium
+ficin,Ficin,fruit,25000,9.2,215,fig,cysteine_protease,6.5,0.25,low
+polyphenol_oxidase,PPO,fruit,128000,6.5,1156,apple,oxidoreductase,5.8,0.35,low
+peroxidase,Peroxidase,fruit,44000,7.0,398,horseradish,oxidoreductase,7.5,0.18,low
+invertase,Invertase,fruit,135000,4.5,1230,yeast,glycosidase,7.2,-0.05,low
+pectinase,Polygalacturonase,fruit,43000,4.0,380,fungal,cell_wall_enzyme,6.5,0.08,low
+lipase,Lipase,fruit,42000,8.0,380,pancreas,fat_digestion,7.0,0.28,low
+amylase,Alpha-Amylase,enzyme,56000,6.8,512,bacillus,starch_hydrolysis,7.8,0.05,low
+protease,Subtilisin,enzyme,35000,8.5,269,bacillus,protein_hydrolysis,7.5,0.12,low
+cellulase,Endoglucanase,enzyme,50000,4.8,437,trichoderma,cellulose_hydrolysis,6.8,0.15,low
+xylanase,Endo-Xylanase,enzyme,22000,6.0,190,trichoderma,hemicellulose_hydrolysis,7.0,0.18,low
+pectinase_enzyme,Pectinase,enzyme,43000,4.0,380,aspergillus,pectin_hydrolysis,6.5,0.08,low
+glucose_oxidase,Glucose Oxidase,enzyme,80000,5.6,629,aspergillus,glucose_oxidation,7.2,0.22,low
+catalase,Catalase,enzyme,250000,7.0,2308,bovine_liver,hydrogen_peroxide_decomposition,8.0,0.15,low
+lactase,Beta-Galactosidase,enzyme,135000,6.5,1023,kluyveromyces,lactose_hydrolysis,7.5,0.02,low
+transglutaminase,Transglutaminase,enzyme,38000,6.0,331,streptoverticillium,protein_crosslinking,7.8,0.18,low
+rennet,Chymosin,enzyme,35000,6.5,323,calf_stomach,milk_coagulation,7.2,0.25,low
+pepsin,Pepsin,enzyme,34600,1.5,327,porcine_stomach,protein_digestion,6.5,0.35,low
+trypsin,Trypsin,enzyme,23300,8.0,223,bovine_pancreas,protein_hydrolysis,7.0,0.12,low
+chymotrypsin,Chymotrypsin,enzyme,25000,8.0,241,bovine_pancreas,protein_hydrolysis,6.8,0.18,low
+elastase,Elastase,enzyme,25900,8.5,240,porcine_pancreas,elastin_hydrolysis,7.2,0.22,low
+carboxypeptidase,Carboxypeptidase A,enzyme,34600,6.0,307,bovine_pancreas,protein_hydrolysis,7.5,0.15,low
+phospholipase,Phospholipase A2,enzyme,14000,8.2,124,porcine_pancreas,phospholipid_hydrolysis,6.8,0.35,medium
+colipase,Colipase,enzyme,12000,5.5,112,porcine_pancreas,lipase_cofactor,7.0,0.28,low
+ribonuclease,RNase A,enzyme,13700,9.6,124,bovine_pancreas,RNA_hydrolysis,8.5,0.08,low
+deoxyribonuclease,DNase I,enzyme,31000,4.9,260,bovine_pancreas,DNA_hydrolysis,7.8,0.12,low
+superoxide_dismutase,SOD,enzyme,32500,5.9,153,bovine_erythrocyte,antioxidant,8.8,0.05,low
+glutathione_peroxidase,GPx,enzyme,84000,8.0,754,bovine_erythrocyte,antioxidant,8.2,0.18,low
+alcohol_dehydrogenase,ADH,enzyme,80000,8.8,748,yeast,alcohol_metabolism,7.0,0.22,low
+aldolase,Aldolase,enzyme,158000,7.4,1456,rabbit_muscle,glycolysis,7.5,0.08,low
+enolase,Enolase,enzyme,93000,7.0,876,yeast,glycolysis,7.2,0.15,low
+hexokinase,Hexokinase,enzyme,102000,5.8,917,yeast,glucose_phosphorylation,7.8,0.12,low
+phosphofructokinase,PFK,enzyme,85000,8.5,780,rabbit_muscle,glycolysis,7.0,0.18,low
+pyruvate_kinase,Pyruvate Kinase,enzyme,58000,7.9,531,rabbit_muscle,glycolysis,7.5,0.22,low
+lactate_dehydrogenase,LDH,enzyme,140000,8.4,1272,rabbit_muscle,lactate_metabolism,7.8,0.08,low
+malate_dehydrogenase,MDH,enzyme,70000,6.2,624,porcine_heart,citric_acid_cycle,8.0,0.12,low
+isocitrate_dehydrogenase,ICDH,enzyme,80000,8.0,712,bovine_heart,citric_acid_cycle,7.5,0.15,low
+succinate_dehydrogenase,SDH,enzyme,124000,7.5,1128,bovine_heart,citric_acid_cycle,8.2,0.28,low
+fumarase,Fumarase,enzyme,194000,7.8,1776,porcine_heart,citric_acid_cycle,8.0,0.05,low
+aconitase,Aconitase,enzyme,82000,7.2,754,bovine_heart,citric_acid_cycle,7.8,0.18,low
+citrate_synthase,Citrate Synthase,enzyme,100000,8.5,890,porcine_heart,citric_acid_cycle,8.5,0.22,low
+acetyl_coa_synthetase,ACS,enzyme,72000,6.8,653,yeast,acetyl_CoA_synthesis,7.2,0.15,low
+fatty_acid_synthase,FAS,enzyme,270000,6.0,2504,rat_liver,fatty_acid_synthesis,6.8,0.35,low
+acetyl_coa_carboxylase,ACC,enzyme,265000,6.5,2345,rat_liver,fatty_acid_synthesis,7.0,0.28,low
+hormone_sensitive_lipase,HSL,enzyme,84000,8.2,775,rat_adipose,lipolysis,6.5,0.32,low
+lipoprotein_lipase,LPL,enzyme,55000,8.8,448,bovine_milk,triglyceride_hydrolysis,7.2,0.38,low
